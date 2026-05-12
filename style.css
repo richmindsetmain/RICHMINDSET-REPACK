@@ -1,0 +1,59 @@
+/* --- UPDATED CONTENT GRID --- */
+.content-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; /* Mobile stack */
+    gap: 30px; 
+    width: 100%;
+}
+
+@media (min-width: 1100px) {
+    .content-grid { 
+        /* Prevents the info panel from getting too skinny */
+        grid-template-columns: minmax(400px, 1fr) 1.2fr; 
+        gap: 50px; 
+        align-items: start;
+    }
+}
+
+/* --- FIXED SCREENSHOT BOXES --- */
+.screenshot-grid-4 { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); /* Always 2 wide */
+    gap: 15px;
+    width: 100%;
+}
+
+.screenshot-grid-4 img { 
+    width: 100%; 
+    /* This keeps them perfectly rectangular regardless of resize */
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+    border-radius: 12px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    filter: brightness(0.7);
+    cursor: pointer;
+    display: block;
+}
+
+.screenshot-grid-4 img:hover { 
+    border-color: var(--neon-blue); 
+    transform: scale(1.03); 
+    filter: brightness(1.1);
+    box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+    z-index: 2;
+}
+
+/* --- INFO PANEL TWEAK --- */
+.info-panel { 
+    background: var(--glass); 
+    border: 1px solid rgba(255,255,255,0.1); 
+    padding: 40px; 
+    border-radius: 20px; 
+    backdrop-filter: blur(25px);
+    height: 100%; /* Matches height of the screenshot grid on desktop */
+}
+
+#three-canvas { z-index: 1; } /* Keep the stars in the back */
+header { z-index: 1000; }     /* Bring buttons to the front */
+.scroll-wrapper { z-index: 10; }

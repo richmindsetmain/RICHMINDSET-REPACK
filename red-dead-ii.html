@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RED DEAD REDEMPTION II | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --outlaw-red: #cc0000; 
+            --neon-blue: #00e5ff; 
+            --gold-sun: #ffcc33; 
+            --glass: rgba(255, 255, 255, 0.05); 
+            --glass-border: rgba(204, 0, 0, 0.3); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #000; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .brand-link {
+            font-family: 'Orbitron';
+            color: #fff;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .brand-link span { color: var(--outlaw-red); }
+
+        .back-link { 
+            border: 1px solid var(--outlaw-red); color: var(--outlaw-red); 
+            padding: 8px 20px; font-family: 'Orbitron'; 
+            font-size: 0.7rem; transition: 0.3s; background: rgba(0,0,0,0.7); 
+            backdrop-filter: blur(10px); border-radius: 4px;
+            text-shadow: 0 0 10px var(--outlaw-red);
+        }
+
+        .back-link:hover { 
+            background: var(--outlaw-red); color: #fff; 
+            box-shadow: 0 0 20px var(--outlaw-red); transform: translateX(-5px); 
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 80px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid var(--glass-border); 
+            border-radius: 15px; 
+            overflow: hidden; 
+            margin-bottom: 25px; 
+            box-shadow: 0 0 40px rgba(204, 0, 0, 0.2); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+                align-items: stretch;
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: var(--glass); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            padding: clamp(25px, 4vw, 40px); 
+            border-radius: 20px; 
+            backdrop-filter: blur(25px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(2rem, 5vw, 3rem); 
+            color: #fff; 
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px var(--outlaw-red);
+            line-height: 1.1;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.7); 
+            line-height: 1.6; 
+            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+            margin-bottom: 20px;
+            border-left: 3px solid var(--outlaw-red);
+            padding-left: 15px;
+        }
+
+        .specs-list { 
+            color: var(--gold-sun); 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+        .specs-list p { margin-bottom: 5px; text-transform: uppercase; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: linear-gradient(45deg, #880000, var(--outlaw-red)); 
+            color: #fff; padding: 16px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            border-radius: 8px; margin-top: 15px; transition: 0.3s; border: none; 
+            cursor: pointer; font-size: 1rem; letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .dl-button:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 0 40px var(--outlaw-red); 
+            filter: brightness(1.2);
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            filter: grayscale(0.5) brightness(0.7);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--outlaw-red); 
+            transform: scale(1.03); 
+            filter: grayscale(0) brightness(1.1);
+            box-shadow: 0 15px 30px rgba(204, 0, 0, 0.4);
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <!-- Connection back to Index -->
+        <a href="index.html" class="brand-link">RICHMINDSET<span>REPACKS</span></a>
+        
+        <!-- Connection back to Games Hub -->
+        <a href="games.html" class="back-link">← BACK TO HUB</a>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <!-- RDR2 Official Trailer -->
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/eaW0tYpxn0k" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">Red Dead II</h1>
+                <p class="description">
+                    America, 1899. Arthur Morgan and the Van der Linde gang are outlaws on the run. With federal agents and the best bounty hunters in the nation massing on their heels, the gang must rob, steal and fight their way across the rugged heartland of America in order to survive.
+                </p>
+                <div class="specs-list">
+                    <p>● STATUS: <span style="color:white">SYSTEMS_OPTIMIZED</span></p>
+                    <p>● SIZE: <span style="color:white">119.2 GB</span></p>
+                    <p>● VERSION: <span style="color:white">v1.0.1491.50</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">INITIALIZE MAGNET</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images8.alphacoders.com/920/920731.jpg" alt="RDR2 Scenery">
+                <img src="https://images.alphacoders.com/920/920733.jpg" alt="Arthur Morgan">
+                <img src="https://images3.alphacoders.com/948/948834.jpg" alt="Dutch's Gang">
+                <img src="https://images6.alphacoders.com/968/968630.jpg" alt="RDR2 Action">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 150;
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        // Changed color to a deep red for the dust/star field
+        for(let i=0; i<5000; i++) starPos.push(THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200));
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xcc0000, size: 0.9 }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0003; 
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.5, x: y * 0.5, duration: 2 });
+        });
+    </script>
+</body>
+</html>

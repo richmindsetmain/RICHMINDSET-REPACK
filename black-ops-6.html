@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACK OPS 6 | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bo-orange: #ff4500; 
+            --slate-gray: #1a1a1a; 
+            --neon-white: #ffffff; 
+            --glass: rgba(255, 255, 255, 0.05); 
+            --glass-border: rgba(255, 69, 0, 0.3); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #000; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .brand-link {
+            font-family: 'Orbitron';
+            color: #fff;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .brand-link span { color: var(--bo-orange); }
+
+        .back-link { 
+            border: 1px solid var(--bo-orange); color: var(--bo-orange); 
+            padding: 8px 20px; font-family: 'Orbitron'; 
+            font-size: 0.7rem; transition: 0.3s; background: rgba(0,0,0,0.7); 
+            backdrop-filter: blur(10px); border-radius: 4px;
+            text-shadow: 0 0 10px var(--bo-orange);
+        }
+
+        .back-link:hover { 
+            background: var(--bo-orange); color: #000; 
+            box-shadow: 0 0 20px var(--bo-orange); transform: translateX(-5px); 
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 80px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid var(--glass-border); 
+            border-radius: 15px; 
+            overflow: hidden; 
+            margin-bottom: 25px; 
+            box-shadow: 0 0 40px rgba(255, 69, 0, 0.2); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+                align-items: stretch;
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: var(--glass); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            padding: clamp(25px, 4vw, 40px); 
+            border-radius: 20px; 
+            backdrop-filter: blur(25px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(2rem, 5vw, 3rem); 
+            color: #fff; 
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px var(--bo-orange);
+            line-height: 1.1;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.7); 
+            line-height: 1.6; 
+            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+            margin-bottom: 20px;
+            border-left: 3px solid var(--bo-orange);
+            padding-left: 15px;
+        }
+
+        .specs-list { 
+            color: var(--neon-white); 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+        .specs-list p { margin-bottom: 5px; text-transform: uppercase; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: linear-gradient(45deg, #000, var(--bo-orange)); 
+            color: #fff; padding: 16px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            border-radius: 8px; margin-top: 15px; transition: 0.3s; border: 1px solid var(--bo-orange); 
+            cursor: pointer; font-size: 1rem; letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .dl-button:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 0 40px var(--bo-orange); 
+            filter: brightness(1.2);
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            filter: contrast(1.2) brightness(0.6);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--bo-orange); 
+            transform: scale(1.03); 
+            filter: contrast(1) brightness(1.1);
+            box-shadow: 0 15px 30px rgba(255, 69, 0, 0.4);
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="index.html" class="brand-link">RICHMINDSET<span>REPACKS</span></a>
+        <a href="games.html" class="back-link">← OPERATIONAL HUB</a>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/S_8o18iQv60" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">Black Ops 6</h1>
+                <p class="description">
+                    Forced to go rogue. Hunted from within. This is Black Ops 6. A mind-bending action thriller set in the early 90s, a period of transition and upheaval in global politics. Developed with specialized optimization for high-end hardware.
+                </p>
+                <div class="specs-list">
+                    <p>● STATUS: <span style="color:var(--bo-orange)">CLASSIFIED_STABLE</span></p>
+                    <p>● SIZE: <span style="color:white">148.5 GB</span></p>
+                    <p>● VERSION: <span style="color:white">v1.0.LAUNCH_EDITION</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">INITIALIZE MAGNET</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images.alphacoders.com/136/1364562.jpeg" alt="BO6 1">
+                <img src="https://images3.alphacoders.com/136/1366904.jpeg" alt="BO6 2">
+                <img src="https://images8.alphacoders.com/136/1366903.jpeg" alt="BO6 3">
+                <img src="https://images5.alphacoders.com/136/1364560.jpeg" alt="BO6 4">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 150;
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<6000; i++) starPos.push(THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200));
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xff4500, size: 0.9 }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0006; 
+            stars.rotation.x += 0.0002;
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.8, x: y * 0.8, duration: 1.2 });
+        });
+    </script>
+</body>
+</html>

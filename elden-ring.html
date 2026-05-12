@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELDEN RING | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --elden-gold: #d4af37; 
+            --spectral-blue: #00e5ff; 
+            --grace-white: #fcf6ba;
+            --glass: rgba(255, 255, 255, 0.03); 
+            --glass-border: rgba(212, 175, 55, 0.3); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #050505; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .back-link { 
+            border: 1px solid var(--elden-gold); color: var(--elden-gold); 
+            padding: 8px 20px; font-family: 'Orbitron'; 
+            font-size: 0.7rem; transition: 0.3s; background: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(10px); border-radius: 2px;
+            text-shadow: 0 0 10px var(--elden-gold);
+            letter-spacing: 2px;
+        }
+
+        .back-link:hover { 
+            background: var(--elden-gold); color: #000; 
+            box-shadow: 0 0 25px var(--elden-gold); transform: translateY(-2px); 
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 90px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid var(--glass-border); 
+            border-radius: 4px; 
+            overflow: hidden; 
+            margin-bottom: 30px; 
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.15); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: var(--glass); 
+            border-bottom: 4px solid var(--elden-gold); 
+            padding: clamp(30px, 5vw, 50px); 
+            border-radius: 4px; 
+            backdrop-filter: blur(30px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            color: #fff; 
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            line-height: 1.1;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.8); 
+            line-height: 1.7; 
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            margin-bottom: 25px;
+            border-left: 3px solid var(--elden-gold);
+            padding-left: 20px;
+        }
+
+        .specs-list { 
+            color: var(--elden-gold); 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .specs-list p { margin-bottom: 8px; text-transform: uppercase; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: linear-gradient(145deg, #bf953f, #fcf6ba, #b38728); 
+            color: #000; padding: 20px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            border-radius: 4px; margin-top: 15px; transition: 0.4s; border: none; 
+            cursor: pointer; font-size: 1.1rem; letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .dl-button:hover { 
+            filter: brightness(1.2);
+            box-shadow: 0 0 30px var(--elden-gold);
+            transform: scale(1.02);
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border-radius: 4px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: 0.5s ease; 
+            filter: brightness(0.6) sepia(0.3);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--elden-gold); 
+            filter: brightness(1) sepia(0);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .screenshot-grid-4 { gap: 10px; }
+            .container { margin-top: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="games.html" class="back-link">← RETURN</a>
+        <div style="font-family: 'Orbitron'; color: var(--elden-gold); font-size: 0.7rem; letter-spacing: 4px;">LANDS_BETWEEN // FROM_SYNC</div>
+    </header>
+
+    <main class="container">
+        <!-- ELDEN RING TRAILER -->
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/AKX0At6303Q" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">Elden Ring</h1>
+                <p class="description">
+                    Rise, Tarnished. Brandish the power of the Elden Ring and become an Elden Lord in the Lands Between. This repack includes the Shadow of the Erdtree expansion and all latest performance fixes.
+                </p>
+                <div class="specs-list">
+                    <p>● STATUS: <span style="color:white">GRACE_ACTIVE</span></p>
+                    <p>● SIZE: <span style="color:white">50.2 GB (Compressed)</span></p>
+                    <p>● VERSION: <span style="color:white">v1.12 DELUXE + DLC</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">RESTORE THE RING</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images5.alphacoders.com/115/1150247.jpg" alt="Elden 1">
+                <img src="https://images2.alphacoders.com/121/1211245.jpg" alt="Elden 2">
+                <img src="https://images.alphacoders.com/114/1148135.jpg" alt="Elden 3">
+                <img src="https://images4.alphacoders.com/121/1211246.jpg" alt="Elden 4">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 150;
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<5000; i++) starPos.push(THREE.MathUtils.randFloatSpread(1400), THREE.MathUtils.randFloatSpread(1400), THREE.MathUtils.randFloatSpread(1400));
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        
+        // Golden Grace Stars
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xd4af37, size: 0.7 }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0003; 
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.6, x: y * 0.6, duration: 2, ease: "power2.out" });
+        });
+    </script>
+</body>
+</html>

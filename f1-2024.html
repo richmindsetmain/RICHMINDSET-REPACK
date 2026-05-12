@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 24 | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --f1-teal: #00d2be; /* Mercedes/Petronas Teal */
+            --carbon: #15151e;
+            --f1-red: #e10600;
+            --glass: rgba(255, 255, 255, 0.03); 
+            --glass-border: rgba(0, 210, 190, 0.3); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #0b0b0b; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .back-link { 
+            border-left: 4px solid var(--f1-red); color: #fff; 
+            padding: 8px 20px; font-family: 'Orbitron'; 
+            font-size: 0.7rem; transition: 0.3s; background: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(10px); 
+            letter-spacing: 2px;
+        }
+
+        .back-link:hover { 
+            background: var(--f1-red); 
+            box-shadow: 0 0 20px rgba(225, 6, 0, 0.5); 
+            transform: translateX(5px); 
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 90px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid var(--glass-border); 
+            border-radius: 4px; 
+            overflow: hidden; 
+            margin-bottom: 30px; 
+            box-shadow: 0 10px 40px rgba(0, 210, 190, 0.1); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: var(--glass); 
+            border-bottom: 4px solid var(--f1-teal); 
+            padding: clamp(30px, 5vw, 50px); 
+            border-radius: 4px; 
+            backdrop-filter: blur(30px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            color: #fff; 
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -2px;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.8); 
+            line-height: 1.7; 
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            margin-bottom: 25px;
+            border-right: 3px solid var(--f1-teal);
+            padding-right: 15px;
+            text-align: right;
+        }
+
+        .specs-list { 
+            color: var(--f1-teal); 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .specs-list p { margin-bottom: 8px; text-transform: uppercase; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: var(--f1-teal); 
+            color: #000; padding: 20px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            border-radius: 2px; margin-top: 15px; transition: 0.4s; border: none; 
+            cursor: pointer; font-size: 1.1rem; letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .dl-button:hover { 
+            filter: brightness(1.1);
+            box-shadow: 0 0 30px var(--f1-teal);
+            transform: scale(1.02);
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border-radius: 4px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: 0.5s ease; 
+            filter: grayscale(0.3) brightness(0.8);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--f1-teal); 
+            filter: grayscale(0) brightness(1.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 210, 190, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .screenshot-grid-4 { gap: 10px; }
+            .container { margin-top: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="games.html" class="back-link">← PADDOCK_BACK</a>
+        <div style="font-family: 'Orbitron'; color: var(--f1-teal); font-size: 0.7rem; letter-spacing: 4px;">FIA_DATA_SYNC // 2024_SEASON</div>
+    </header>
+
+    <main class="container">
+        <!-- F1 24 TRAILER -->
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/9G_9N-WbeDk" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">F1® 24</h1>
+                <p class="description">
+                    Be one of the 20. Drive like the greatest in EA SPORTS™ F1® 24, the official video game of the 2024 FIA Formula One World Championship™. Featuring the all-new Dynamic Handling system.
+                </p>
+                <div class="specs-list">
+                    <p>● TELEMETRY: <span style="color:white">CONNECTED_STABLE</span></p>
+                    <p>● PAYLOAD: <span style="color:white">45.8 GB (Repack)</span></p>
+                    <p>● VERSION: <span style="color:white">v1.3 CHAMPIONS EDITION</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">INITIALIZE GRID</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images.alphacoders.com/135/1359336.jpeg" alt="F1 24 car">
+                <img src="https://images3.alphacoders.com/135/1359338.jpeg" alt="F1 24 track">
+                <img src="https://images5.alphacoders.com/135/1359340.jpeg" alt="F1 24 rain">
+                <img src="https://images7.alphacoders.com/135/1359339.jpeg" alt="F1 24 cockpit">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 150;
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<5000; i++) starPos.push(THREE.MathUtils.randFloatSpread(1400), THREE.MathUtils.randFloatSpread(1400), THREE.MathUtils.randFloatSpread(1400));
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        
+        // F1 Teal & White Stars
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0x00d2be, size: 0.6 }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0004; 
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.5, x: y * 0.5, duration: 1.5, ease: "power2.out" });
+        });
+    </script>
+</body>
+</html>

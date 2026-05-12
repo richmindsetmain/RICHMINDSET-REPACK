@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA VICE CITY | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --vice-cyan: #00f2ff; 
+            --vice-pink: #ff00ff; 
+            --glass: rgba(10, 0, 20, 0.9); 
+            --border-glow: rgba(0, 242, 255, 0.4); 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #05000a; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: 20px 40px; 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
+        .back-link { 
+            border: 1px solid var(--vice-cyan); color: var(--vice-cyan); 
+            padding: 10px 22px; font-family: 'Orbitron'; 
+            font-size: 0.75rem; transition: 0.3s; background: rgba(0,0,0,0.6); 
+            border-radius: 2px; text-shadow: 0 0 8px var(--vice-cyan);
+            letter-spacing: 2px;
+        }
+
+        .back-link:hover { background: var(--vice-cyan); color: #000; box-shadow: 0 0 25px var(--vice-cyan); }
+
+        .container { 
+            max-width: 1600px; /* Increased width for larger images */
+            margin: 100px auto 40px; 
+            padding: 0 30px; 
+            z-index: 10; 
+            position: relative;
+        }
+
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 21/9; /* Cinematic wider look */
+            max-height: 450px; 
+            border: 1px solid var(--border-glow);
+            border-radius: 4px;
+            overflow: hidden; 
+            margin-bottom: 30px; 
+            background: #000;
+        }
+
+        /* --- THE LARGE GRID LAYOUT --- */
+        .main-content-layout { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 30px; 
+        }
+
+        @media (min-width: 1100px) {
+            .main-content-layout { 
+                grid-template-columns: 350px 1fr; /* Fixed sidebar, expansive grid */
+                gap: 30px; 
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-card { 
+            background: var(--glass); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            padding: 30px; 
+            backdrop-filter: blur(25px);
+            border-top: 4px solid var(--vice-pink);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: 2.2rem; 
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px var(--vice-pink);
+            margin-bottom: 15px;
+        }
+
+        .stats { font-size: 0.85rem; color: var(--vice-cyan); margin-bottom: 20px; }
+        .stats p { padding: 8px 0; border-bottom: 1px solid rgba(0, 242, 255, 0.1); }
+
+        .dl-btn { 
+            background: linear-gradient(90deg, var(--vice-pink), #b000b0);
+            color: white; padding: 18px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            transition: 0.3s; border: none; cursor: pointer; letter-spacing: 2px;
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+        }
+
+        .dl-btn:hover { transform: scale(1.05); filter: brightness(1.2); }
+
+        /* --- MAXIMIZED SCREENSHOT GRID --- */
+        .screenshot-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .ss-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Keeps boxes consistent */
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            background: #111;
+            transition: 0.4s ease;
+        }
+
+        .ss-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s transform ease;
+        }
+
+        .ss-box:hover {
+            border-color: var(--vice-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.3);
+        }
+
+        .ss-box:hover img { transform: scale(1.05); }
+
+        /* Mobile Viewports */
+        @media (max-width: 800px) {
+            .screenshot-container { grid-template-columns: 1fr; }
+            .title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="games.html" class="back-link">← SYSTEMS_OFFLINE</a>
+        <div style="font-family: 'Orbitron'; color: var(--vice-pink); font-size: 0.7rem; letter-spacing: 4px;">PROJECT_VERCETTI // REPACKED</div>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/f_VBXRZuKoE" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="main-content-layout">
+            <!-- Sidebar Info -->
+            <div class="info-card">
+                <div>
+                    <h1 class="title">Vice City</h1>
+                    <p style="opacity: 0.7; margin-bottom: 20px;">Relive the masterpiece that defined the 80s aesthetic. Optimized for modern systems with enhanced lighting and textures.</p>
+                    <div class="stats">
+                        <p>● BUILD: DE_V1.12</p>
+                        <p>● ASSET_SIZE: 4.5 GB</p>
+                        <p>● SYSTEM: STABLE</p>
+                    </div>
+                </div>
+                <button class="dl-btn">DOWNLOAD NOW</button>
+            </div>
+
+            <!-- Maximized 2x2 Grid -->
+            <div class="screenshot-container">
+                <div class="ss-box"><img src="https://images7.alphacoders.com/119/1194451.jpg" alt="GTA VC 1"></div>
+                <div class="ss-box"><img src="https://images5.alphacoders.com/119/1194450.jpg" alt="GTA VC 2"></div>
+                <div class="ss-box"><img src="https://images2.alphacoders.com/119/1194454.jpg" alt="GTA VC 3"></div>
+                <div class="ss-box"><img src="https://images.alphacoders.com/119/1194455.jpg" alt="GTA VC 4"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true });
+        
+        function resize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        camera.position.z = 120;
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        for (let i = 0; i < 4000; i++) {
+            vertices.push(THREE.MathUtils.randFloatSpread(1000), THREE.MathUtils.randFloatSpread(1000), THREE.MathUtils.randFloatSpread(1000));
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const points = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0xff00ff, size: 0.7 }));
+        scene.add(points);
+
+        function anim() {
+            requestAnimationFrame(anim);
+            points.rotation.y += 0.0006;
+            renderer.render(scene, camera);
+        }
+        anim();
+    </script>
+</body>
+</html>
