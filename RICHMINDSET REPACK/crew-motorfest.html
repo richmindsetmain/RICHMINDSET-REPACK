@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE CREW MOTORFEST | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --festival-gold: #ffcc00; 
+            --island-turquoise: #00f2ff;
+            --sunset-orange: #ff5e00;
+            --glass: rgba(255, 255, 255, 0.03); 
+            --glass-border: rgba(255, 204, 0, 0.3); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #0a0a0c; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .back-link { 
+            border: 1px solid var(--festival-gold); color: var(--festival-gold); 
+            padding: 8px 20px; font-family: 'Orbitron'; 
+            font-size: 0.7rem; transition: 0.3s; background: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(10px); border-radius: 50px;
+            text-shadow: 0 0 10px var(--festival-gold);
+            letter-spacing: 2px;
+        }
+
+        .back-link:hover { 
+            background: var(--festival-gold); color: #000; 
+            box-shadow: 0 0 25px var(--festival-gold); transform: scale(1.05); 
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 90px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid var(--glass-border); 
+            border-radius: 12px; 
+            overflow: hidden; 
+            margin-bottom: 30px; 
+            box-shadow: 0 0 50px rgba(255, 204, 0, 0.15); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: var(--glass); 
+            border-left: 5px solid var(--sunset-orange); 
+            padding: clamp(30px, 5vw, 50px); 
+            border-radius: 8px; 
+            backdrop-filter: blur(30px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(1.8rem, 4vw, 3.2rem); 
+            color: #fff; 
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, var(--festival-gold), var(--sunset-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.8); 
+            line-height: 1.7; 
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            margin-bottom: 25px;
+        }
+
+        .specs-list { 
+            color: var(--island-turquoise); 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .specs-list p { margin-bottom: 8px; text-transform: uppercase; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: linear-gradient(90deg, var(--sunset-orange), var(--festival-gold)); 
+            color: #000; padding: 20px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            border-radius: 8px; margin-top: 15px; transition: 0.4s; border: none; 
+            cursor: pointer; font-size: 1.1rem; letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .dl-button:hover { 
+            filter: brightness(1.2);
+            box-shadow: 0 0 30px var(--sunset-orange);
+            transform: translateY(-3px);
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: 0.5s ease; 
+            filter: saturate(1.2);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--island-turquoise); 
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .screenshot-grid-4 { gap: 10px; }
+            .container { margin-top: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="games.html" class="back-link">← HUB_EXIT</a>
+        <div style="font-family: 'Orbitron'; color: var(--festival-gold); font-size: 0.7rem; letter-spacing: 4px;">MOTORFEST_OAHU // SYNC_ACTIVE</div>
+    </header>
+
+    <main class="container">
+        <!-- THE CREW MOTORFEST TRAILER -->
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/fA_8A8XlX0A" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">The Crew Motorfest</h1>
+                <p class="description">
+                    Celebrate car culture in the heart of O'ahu. Master the playlists, explore the volcanic slopes, and build your ultimate collection of legendary vehicles in this open-world driving festival.
+                </p>
+                <div class="specs-list">
+                    <p>● FESTIVAL: <span style="color:white">O'AHU_EXPANSION</span></p>
+                    <p>● STORAGE: <span style="color:white">40 GB (Repack)</span></p>
+                    <p>● VERSION: <span style="color:white">v1.2.0 GOLD EDITION</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">JOIN THE FESTIVAL</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images4.alphacoders.com/132/1321035.jpeg" alt="Motorfest 1">
+                <img src="https://images.alphacoders.com/132/1321034.jpeg" alt="Motorfest 2">
+                <img src="https://images6.alphacoders.com/132/1321041.jpeg" alt="Motorfest 3">
+                <img src="https://images2.alphacoders.com/132/1321040.jpeg" alt="Motorfest 4">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 150;
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<4000; i++) starPos.push(THREE.MathUtils.randFloatSpread(1400), THREE.MathUtils.randFloatSpread(1400), THREE.MathUtils.randFloatSpread(1400));
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        
+        // Warm Festival Gold & Island Turquoise Stars
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffcc00, size: 0.7 }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0003; 
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.4, x: y * 0.4, duration: 2.5, ease: "power1.out" });
+        });
+    </script>
+</body>
+</html>

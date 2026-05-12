@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALL OF DUTY: WWII | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&family=Staatliches&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --wwii-red: #8b0000; 
+            --army-olive: #3d402e; 
+            --iron-gray: #222222; 
+            --glass: rgba(255, 255, 255, 0.03); 
+            --glass-border: rgba(139, 0, 0, 0.4); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #000; 
+            color: #d1d1d1; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .brand-link {
+            font-family: 'Orbitron';
+            color: #fff;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .brand-link span { color: var(--wwii-red); }
+
+        .back-link { 
+            border: 2px solid #555; color: #fff; 
+            padding: 8px 20px; font-family: 'Staatliches'; 
+            font-size: 1rem; letter-spacing: 1px; transition: 0.3s; 
+            background: rgba(30, 30, 30, 0.85); 
+            backdrop-filter: blur(10px); border-radius: 0;
+        }
+
+        .back-link:hover { 
+            border-color: var(--wwii-red);
+            background: var(--wwii-red); color: #fff; 
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5); 
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 80px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 3px solid #333; 
+            border-radius: 2px; 
+            overflow: hidden; 
+            margin-bottom: 25px; 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+                align-items: stretch;
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: linear-gradient(135deg, rgba(34,34,34,0.9), rgba(10,10,10,0.95)); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            padding: clamp(25px, 4vw, 40px); 
+            border-radius: 4px; 
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 4px solid var(--wwii-red);
+        }
+
+        .title { 
+            font-family: 'Staatliches'; 
+            font-size: clamp(2.5rem, 6vw, 4rem); 
+            color: #fff; 
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
+        }
+
+        .description {
+            color: #aaa; 
+            line-height: 1.6; 
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            margin-bottom: 20px;
+            border-left: 3px solid #444;
+            padding-left: 15px;
+        }
+
+        .specs-list { 
+            color: var(--wwii-red); 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-family: 'Staatliches';
+        }
+        .specs-list p { margin-bottom: 5px; color: #888; }
+        .specs-list span { color: #ddd; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: #1a1a1a; 
+            color: #fff; padding: 18px; text-align: center; 
+            font-family: 'Staatliches'; font-size: 1.5rem; 
+            letter-spacing: 3px; border-radius: 0; margin-top: 15px; 
+            transition: 0.3s; border: 1px solid #444; 
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .dl-button:hover { 
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2); 
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border-radius: 2px; 
+            border: 2px solid #222; 
+            transition: 0.5s; 
+            filter: grayscale(0.4) contrast(1.1);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--wwii-red); 
+            filter: grayscale(0) contrast(1);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="index.html" class="brand-link">RICHMINDSET<span>REPACKS</span></a>
+        <a href="games.html" class="back-link">← COMMAND HUB</a>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/D4Q_nSywZqc" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">Call of Duty: WWII</h1>
+                <p class="description">
+                    Experience the story of the brotherhood of men fighting to preserve freedom in a world on the brink of tyranny. Call of Duty: WWII returns the franchise to its roots in a cinematic experience that captures the unforgettable heroism of the soldiers who fought together in a war that changed the world.
+                </p>
+                <div class="specs-list">
+                    <p>● DIVISION: <span>INFANTRY_CORPS</span></p>
+                    <p>● SIZE: <span>65.0 GB (Highly Compressed)</span></p>
+                    <p>● VERSION: <span>v1.25.DIGITAL_DELUXE</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">DECODE MAGNET</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images4.alphacoders.com/823/823616.jpg" alt="WWII 1">
+                <img src="https://images3.alphacoders.com/823/823619.jpg" alt="WWII 2">
+                <img src="https://images8.alphacoders.com/823/823620.jpg" alt="WWII 3">
+                <img src="https://images5.alphacoders.com/835/835562.jpg" alt="WWII 4">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 100;
+        
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<7000; i++) {
+            starPos.push(
+                THREE.MathUtils.randFloatSpread(1000), 
+                THREE.MathUtils.randFloatSpread(1000), 
+                THREE.MathUtils.randFloatSpread(1000)
+            );
+        }
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ 
+            color: 0xcccccc, 
+            size: 0.9,
+            transparent: true,
+            opacity: 0.4
+        }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0005; 
+            stars.position.y -= 0.12; // Falling debris/snow effect
+            if(stars.position.y < -150) stars.position.y = 150;
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.4, x: y * 0.4, duration: 2 });
+        });
+    </script>
+</body>
+</html>

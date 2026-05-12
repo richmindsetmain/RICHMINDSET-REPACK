@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RICHMINDSET REPACKS | SYNC HUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00e5ff;
+            --neon-green: #24ff14;
+            --pure-white: #ffffff;
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --gold-main: linear-gradient(145deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; }
+
+        body { 
+            background: #000; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            height: 100vh; width: 100vw;
+            display: flex; flex-direction: column;
+            overflow: hidden; 
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        header {
+            position: relative;
+            z-index: 1000;
+            padding: 15px 20px; 
+            display: flex;
+            flex-direction: column; 
+            gap: 15px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            header { flex-direction: row; justify-content: space-between; padding: 25px 50px; }
+        }
+
+        .brand-name { font-family: 'Orbitron'; text-transform: uppercase; letter-spacing: 2px; font-size: clamp(1rem, 5vw, 1.8rem); }
+        .brand-name span { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); }
+
+        .top-nav-bar { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid var(--glass-border); 
+            backdrop-filter: blur(10px);
+            padding: 8px 16px; 
+            font-family: 'Orbitron'; 
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 1px; color: rgba(255,255,255,0.9);
+            border-radius: 4px; transition: 0.3s;
+        }
+
+        @media (min-width: 768px) { .nav-btn { padding: 14px 28px; font-size: 0.85rem; } }
+
+        .nav-btn:hover { color: #fff; border-color: var(--neon-blue); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
+        .btn-premium { background: var(--gold-main) !important; color: #000 !important; border: none; }
+
+        .scroll-wrapper {
+            position: relative;
+            z-index: 10;
+            flex-grow: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch; 
+            padding: 10px 20px 40px 20px;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 20px;
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) { .portal-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1100px) { .portal-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .viewing-portal {
+            position: relative;
+            height: 180px; 
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        @media (min-width: 768px) { .viewing-portal { height: clamp(230px, 28vh, 320px); } }
+
+        .viewing-portal:hover { border-color: var(--neon-blue); background: rgba(255, 255, 255, 0.06); }
+
+        .game-card {
+            position: absolute;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0;
+            visibility: hidden; /* Critical: Prevents clicks while invisible */
+            animation: neuralSync 36s infinite linear;
+        }
+
+        .label { font-family: 'Orbitron'; font-size: 1.1rem; letter-spacing: 2px; color: #fff; text-align: center; padding: 0 10px; }
+        .status { font-size: 0.55rem; color: var(--neon-blue); margin-top: 6px; font-weight: bold; letter-spacing: 2px; }
+
+        @media (min-width: 768px) {
+            .label { font-size: clamp(1.2rem, 2vw, 1.8rem); letter-spacing: 3px; }
+            .status { font-size: 0.6rem; margin-top: 8px; }
+        }
+
+        @keyframes neuralSync {
+            0% { 
+                opacity: 0; 
+                filter: blur(10px); 
+                transform: scale(0.9);
+                visibility: hidden;
+                z-index: 1;
+            }
+            2%, 14% { 
+                opacity: 1; 
+                filter: blur(0px); 
+                transform: scale(1);
+                visibility: visible;
+                z-index: 100; /* Brings the active game to the front */
+            }
+            16.66%, 100% { 
+                opacity: 0; 
+                filter: blur(10px); 
+                transform: scale(1.1);
+                visibility: hidden;
+                z-index: 1;
+            }
+        }
+
+        .game-card:nth-child(1) { animation-delay: 0s; }
+        .game-card:nth-child(2) { animation-delay: 6s; }
+        .game-card:nth-child(3) { animation-delay: 12s; }
+        .game-card:nth-child(4) { animation-delay: 18s; }
+        .game-card:nth-child(5) { animation-delay: 24s; }
+        .game-card:nth-child(6) { animation-delay: 30s; }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+
+    <header>
+        <div class="brand-container">
+            <h1 class="brand-name">RICHMINDSET<span>REPACKS</span></h1>
+        </div>
+        <nav class="top-nav-bar">
+            <a href="about.html" class="nav-btn">ABOUT</a>
+            <a href="games.html" class="nav-btn">GAMES</a>
+            <a href="mods.html" class="nav-btn">MODS</a>
+            <a href="premium.html" class="nav-btn btn-premium">👑 PREMIUM</a>
+        </nav>
+    </header>
+
+    <div class="scroll-wrapper">
+        <div class="portal-grid">
+            
+            <!-- PORTAL 1: ROCKSTAR FLAGSHIPS -->
+            <div class="viewing-portal">
+                <a href="gta-v.html" class="game-card"><span class="label">GTAV</span><span class="status">NEURAL_STABLE</span></a>
+                <a href="red-dead-ii.html" class="game-card"><span class="label">RED DEAD II</span><span class="status">NEURAL_STABLE</span></a>
+                <a href="gta-iv.html" class="game-card"><span class="label">GTAIV</span><span class="status">NEURAL_STABLE</span></a>
+                <a href="rdr1.html" class="game-card"><span class="label">RED DEAD I</span><span class="status">NEURAL_STABLE</span></a>
+                <a href="la-noire.html" class="game-card"><span class="label">L.A. NOIRE</span><span class="status">NEURAL_STABLE</span></a>
+                <a href="bully-se.html" class="game-card"><span class="label">BULLY SE</span><span class="status">NEURAL_STABLE</span></a>
+            </div>
+
+            <!-- PORTAL 2: MODERN WARFARE SAGA -->
+            <div class="viewing-portal">
+                <a href="mw-iii.html" class="game-card"><span class="label">MODERN WARFARE III</span><span class="status">COMBAT_READY</span></a>
+                <a href="cod-mw2.html" class="game-card"><span class="label">MODERN WARFARE II</span><span class="status">COMBAT_READY</span></a>
+                <a href="mw-2019.html" class="game-card"><span class="label">MODERN WARFARE</span><span class="status">COMBAT_READY</span></a>
+                <a href="ghosts.html" class="game-card"><span class="label">COD GHOSTS</span><span class="status">COMBAT_READY</span></a>
+                <a href="adv-warfare.html" class="game-card"><span class="label">ADV. WARFARE</span><span class="status">COMBAT_READY</span></a>
+                <a href="cod-infinite.html" class="game-card"><span class="label">INF. WARFARE</span><span class="status">COMBAT_READY</span></a>
+            </div>
+
+            <!-- PORTAL 3: BLACK OPS & ORIGINS -->
+            <div class="viewing-portal">
+                <a href="black-ops-6.html" class="game-card"><span class="label">BLACK OPS 6</span><span class="status">SYSTEM_BOOT</span></a>
+                <a href="cold-war.html" class="game-card"><span class="label">COLD WAR</span><span class="status">SYSTEM_BOOT</span></a>
+                <a href="cod-bo4.html" class="game-card"><span class="label">BLACK OPS 4</span><span class="status">SYSTEM_BOOT</span></a>
+                <a href="black-ops-3.html" class="game-card"><span class="label">BLACK OPS 3</span><span class="status">SYSTEM_BOOT</span></a>
+                <a href="vanguard.html" class="game-card"><span class="label">VANGUARD</span><span class="status">SYSTEM_BOOT</span></a>
+                <a href="wwii.html" class="game-card"><span class="label">COD WWII</span><span class="status">SYSTEM_BOOT</span></a>
+            </div>
+
+            <!-- PORTAL 4: RACING & MOTORSPORT -->
+            <div class="viewing-portal">
+                <a href="forza-horizon-5.html" class="game-card"><span class="label">FORZA HORIZON 5</span><span class="status">FESTIVAL_ACTIVE</span></a>
+                <a href="forza-motorsport.html" class="game-card"><span class="label">FORZA MOTORSPORT</span><span class="status">STREET_LINK</span></a>
+                <a href="nfs-unbound.html" class="game-card"><span class="label">NFS UNBOUND</span><span class="status">STREET_LINK</span></a>
+                <a href="crew-motorfest.html" class="game-card"><span class="label">THE CREW MOTORFEST</span><span class="status">STREET_LINK</span></a>
+                <a href="assetto-corsa.html" class="game-card"><span class="label">ASSETTO CORSA</span><span class="status">STREET_LINK</span></a>
+                <a href="dirt-5.html" class="game-card"><span class="label">DIRT 5</span><span class="status">STREET_LINK</span></a>
+            </div>
+
+            <!-- PORTAL 5: SONY EXCLUSIVES -->
+            <div class="viewing-portal">
+                <a href="gow-ragnarok.html" class="game-card"><span class="label">GOW RAGNAROK</span><span class="status">SONY_SYNC</span></a>
+                <a href="ghost-tsushima.html" class="game-card"><span class="label">GHOST OF TSUSHIMA</span><span class="status">SONY_SYNC</span></a>
+                <a href="spiderman-2.html" class="game-card"><span class="label">SPIDER-MAN 2</span><span class="status">SONY_SYNC</span></a>
+                <a href="tlou-part2.html" class="game-card"><span class="label">TLOU PART II</span><span class="status">SONY_SYNC</span></a>
+                <a href="horizon-forbidden.html" class="game-card"><span class="label">HORIZON FORBIDDEN</span><span class="status">SONY_SYNC</span></a>
+                <a href="gran-turismo7.html" class="game-card"><span class="label">GRAN TURISMO 7</span><span class="status">SONY_SYNC</span></a>
+            </div>
+
+            <!-- PORTAL 6: LEGACY & OPEN WORLD -->
+            <div class="viewing-portal">
+                <a href="elden-ring.html" class="game-card"><span class="label">ELDEN RING</span><span class="status">LEGACY_LINK</span></a>
+                <a href="cyberpunk.html" class="game-card"><span class="label">CYBERPUNK 2077</span><span class="status">LEGACY_LINK</span></a>
+                <a href="max-payne-3.html" class="game-card"><span class="label">MAX PAYNE 3</span><span class="status">LEGACY_LINK</span></a>
+                <a href="gta-san-andreas.html" class="game-card"><span class="label">SAN ANDREAS</span><span class="status">LEGACY_LINK</span></a>
+                <a href="gta-vice-city.html" class="game-card"><span class="label">VICE CITY</span><span class="status">LEGACY_LINK</span></a>
+                <a href="f1-24.html" class="game-card"><span class="label">F1 24</span><span class="status">LEGACY_LINK</span></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.z = 100;
+
+        const stars = new THREE.BufferGeometry();
+        const pos = [];
+        for(let i=0; i<4000; i++) pos.push(THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200));
+        stars.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+        const starPoints = new THREE.Points(stars, new THREE.PointsMaterial({ color: 0xffffff, size: 0.6 }));
+        scene.add(starPoints);
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            starPoints.rotation.y += 0.0004;
+            starPoints.position.x += (mouseX * 10 - starPoints.position.x) * 0.05;
+            starPoints.position.y += (mouseY * 10 - starPoints.position.y) * 0.05;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html>

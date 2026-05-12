@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA IV | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --liberty-blue: #00e5ff; 
+            --industrial-grey: #2c3e50;
+            --terminal-green: #24ff14; 
+            --glass: rgba(10, 15, 20, 0.7); 
+            --glass-border: rgba(0, 229, 255, 0.15); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #000; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .back-link { 
+            border: 1px solid var(--liberty-blue); color: var(--liberty-blue); 
+            padding: 8px 20px; font-family: 'Orbitron'; 
+            font-size: 0.7rem; transition: 0.3s; background: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(10px); border-radius: 2px;
+            text-shadow: 0 0 8px var(--liberty-blue);
+        }
+
+        .back-link:hover { 
+            background: var(--liberty-blue); color: #000; 
+            box-shadow: 0 0 25px var(--liberty-blue); transform: translateX(-5px); 
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 90px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 4px; 
+            overflow: hidden; 
+            margin-bottom: 30px; 
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+                align-items: stretch;
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: var(--glass); 
+            border: 1px solid var(--glass-border); 
+            padding: clamp(30px, 5vw, 45px); 
+            border-radius: 4px; 
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(2.5rem, 6vw, 4rem); 
+            color: #fff; 
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            /* GTA IV Style Staggered Shadow */
+            text-shadow: 2px 2px 0px #333, 4px 4px 0px var(--liberty-blue);
+            line-height: 1;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.6); 
+            line-height: 1.7; 
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            margin-bottom: 25px;
+            border-left: 2px solid var(--liberty-blue);
+            padding-left: 20px;
+        }
+
+        .specs-list { 
+            color: var(--terminal-green); 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+        .specs-list p { margin-bottom: 8px; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: var(--liberty-blue); 
+            color: #000; padding: 20px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            border-radius: 2px; margin-top: 20px; transition: 0.3s; border: none; 
+            cursor: pointer; font-size: 1.1rem; letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .dl-button:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 40px rgba(0, 229, 255, 0.4); 
+            background: #fff;
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border-radius: 4px; 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            transition: 0.5s ease; 
+            filter: grayscale(60%) contrast(1.2) brightness(0.7);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--liberty-blue); 
+            transform: scale(1.02); 
+            filter: grayscale(0%) brightness(1.1);
+            box-shadow: 0 15px 30px rgba(0, 229, 255, 0.2);
+            z-index: 5;
+        }
+
+        @media (max-width: 600px) {
+            .screenshot-grid-4 { gap: 10px; }
+            .container { margin-top: 80px; }
+            .title { text-shadow: 2px 2px 0px var(--liberty-blue); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="games.html" class="back-link">← TERMINAL</a>
+        <div style="font-family: 'Orbitron'; color: var(--liberty-blue); font-size: 0.7rem; letter-spacing: 4px; opacity: 0.6;" class="mobile-hide">LIBERTY CITY // 40.7128° N</div>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/h74M58rUoM0" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">GTA IV</h1>
+                <p class="description">
+                    Life is complicated. For Niko Bellic, it's about survival. Welcome to Liberty City, where the American Dream is a lie and every corner holds a different debt. Fully optimized Complete Edition.
+                </p>
+                <div class="specs-list">
+                    <p>> STATUS: <span style="color:white">ENCRYPTED_STABLE</span></p>
+                    <p>> PACK_SIZE: <span style="color:white">22.0 GB</span></p>
+                    <p>> BUILD: <span style="color:white">v1.2.0.43_COMPLETE</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">EXECUTE MAGNET</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images4.alphacoders.com/836/83651.jpg" alt="GTA 1">
+                <img src="https://images4.alphacoders.com/836/83654.jpg" alt="GTA 2">
+                <img src="https://images4.alphacoders.com/217/217088.jpg" alt="GTA 3">
+                <img src="https://images4.alphacoders.com/232/232230.jpg" alt="GTA 4">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 150;
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<6000; i++) starPos.push(THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200));
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0x00e5ff, size: 0.9 }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0003; 
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.5, x: y * 0.5, duration: 2 });
+        });
+    </script>
+</body>
+</html>

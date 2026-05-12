@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODERN WARFARE III | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --konni-red: #b30000; 
+            --tactical-gray: #121212; 
+            --active-red: #ff0000; 
+            --glass: rgba(255, 255, 255, 0.05); 
+            --glass-border: rgba(179, 0, 0, 0.4); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #000; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .brand-link {
+            font-family: 'Orbitron';
+            color: #fff;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .brand-link span { color: var(--konni-red); }
+
+        .back-link { 
+            border: 1px solid var(--konni-red); color: var(--konni-red); 
+            padding: 8px 20px; font-family: 'Orbitron'; 
+            font-size: 0.7rem; transition: 0.3s; background: rgba(0,0,0,0.7); 
+            backdrop-filter: blur(10px); border-radius: 4px;
+            text-shadow: 0 0 10px var(--konni-red);
+        }
+
+        .back-link:hover { 
+            background: var(--konni-red); color: #fff; 
+            box-shadow: 0 0 20px var(--konni-red); transform: translateX(-5px); 
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 80px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid var(--glass-border); 
+            border-radius: 15px; 
+            overflow: hidden; 
+            margin-bottom: 25px; 
+            box-shadow: 0 0 40px rgba(179, 0, 0, 0.2); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+                align-items: stretch;
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: var(--glass); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            padding: clamp(25px, 4vw, 40px); 
+            border-radius: 20px; 
+            backdrop-filter: blur(25px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(2rem, 5vw, 3rem); 
+            color: #fff; 
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px var(--konni-red);
+            line-height: 1.1;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.7); 
+            line-height: 1.6; 
+            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+            margin-bottom: 20px;
+            border-left: 3px solid var(--konni-red);
+            padding-left: 15px;
+        }
+
+        .specs-list { 
+            color: var(--active-red); 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+        .specs-list p { margin-bottom: 5px; text-transform: uppercase; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: linear-gradient(45deg, #000, var(--konni-red)); 
+            color: #fff; padding: 16px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            border-radius: 8px; margin-top: 15px; transition: 0.3s; border: 1px solid var(--konni-red); 
+            cursor: pointer; font-size: 1rem; letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .dl-button:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 0 40px var(--konni-red); 
+            filter: brightness(1.2);
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            filter: grayscale(0.6) brightness(0.7);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--konni-red); 
+            transform: scale(1.03); 
+            filter: grayscale(0.2) brightness(1.1);
+            box-shadow: 0 15px 30px rgba(179, 0, 0, 0.4);
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="index.html" class="brand-link">RICHMINDSET<span>REPACKS</span></a>
+        <a href="games.html" class="back-link">← TACTICAL HUB</a>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/m7S_vD_f9Yk" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">Modern Warfare III</h1>
+                <p class="description">
+                    In the direct sequel to the record-breaking Call of Duty: Modern Warfare II, Captain Price and Task Force 141 face off against the ultimate threat. The ultranationalist war criminal Vladimir Makarov is extending his grasp across the world.
+                </p>
+                <div class="specs-list">
+                    <p>● STATUS: <span style="color:white">THREAT_LEVEL_CRITICAL</span></p>
+                    <p>● SIZE: <span style="color:white">149.0 GB</span></p>
+                    <p>● VERSION: <span style="color:white">v1.34.CORE_INSTALL</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">INITIALIZE MAGNET</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images3.alphacoders.com/132/1327429.jpeg" alt="MWIII 1">
+                <img src="https://images.alphacoders.com/132/1328905.jpeg" alt="MWIII 2">
+                <img src="https://images8.alphacoders.com/132/1327428.jpeg" alt="MWIII 3">
+                <img src="https://images4.alphacoders.com/132/1328904.jpeg" alt="MWIII 4">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 150;
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<6000; i++) starPos.push(THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200), THREE.MathUtils.randFloatSpread(1200));
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0x990000, size: 0.8 }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0004; 
+            stars.rotation.x += 0.0001;
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.6, x: y * 0.6, duration: 1.8 });
+        });
+    </script>
+</body>
+</html>

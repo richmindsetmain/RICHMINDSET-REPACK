@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHOSTS | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&family=Michroma&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --ghost-blue: #00d4ff; 
+            --ash-gray: #121212; 
+            --smoke-white: #e0e0e0; 
+            --glass: rgba(0, 212, 255, 0.03); 
+            --glass-border: rgba(255, 255, 255, 0.15); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #050505; 
+            color: var(--smoke-white); 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .brand-link {
+            font-family: 'Orbitron';
+            color: #fff;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .brand-link span { color: var(--ghost-blue); }
+
+        .back-link { 
+            border: 1px solid rgba(255,255,255,0.3); color: #fff; 
+            padding: 8px 22px; font-family: 'Michroma'; 
+            font-size: 0.65rem; letter-spacing: 1px; transition: 0.4s; 
+            background: rgba(0, 0, 0, 0.8); 
+            backdrop-filter: blur(15px); border-radius: 0;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+
+        .back-link:hover { 
+            border-color: var(--ghost-blue);
+            color: var(--ghost-blue);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); 
+            transform: scale(1.05);
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 80px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid var(--glass-border); 
+            border-radius: 0; 
+            overflow: hidden; 
+            margin-bottom: 25px; 
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9); 
+            background: #000;
+            position: relative;
+        }
+
+        .video-box::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px);
+            background-size: 100% 3px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+                align-items: stretch;
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: rgba(18, 18, 18, 0.8); 
+            border-left: 5px solid var(--ghost-blue); 
+            padding: clamp(25px, 4vw, 40px); 
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title { 
+            font-family: 'Michroma'; 
+            font-size: clamp(1.8rem, 4vw, 2.8rem); 
+            color: #fff; 
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .description {
+            color: #999; 
+            line-height: 1.7; 
+            font-size: clamp(0.9rem, 1.4vw, 1rem);
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .specs-list { 
+            margin-bottom: 20px;
+            font-family: 'Orbitron';
+        }
+        .specs-list p { 
+            margin-bottom: 8px; 
+            font-size: 0.75rem; 
+            color: var(--ghost-blue);
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 4px;
+        }
+        .specs-list span { color: #fff; }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: #fff; 
+            color: #000; padding: 20px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            letter-spacing: 4px; transition: 0.3s; border: none; 
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .dl-button:hover { 
+            background: var(--ghost-blue);
+            color: #fff;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); 
+            transform: translateY(-3px);
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: 0.6s; 
+            filter: contrast(1.3) brightness(0.6) saturate(0.5);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--ghost-blue); 
+            filter: contrast(1) brightness(1) saturate(1);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="index.html" class="brand-link">RICHMINDSET<span>REPACKS</span></a>
+        <a href="games.html" class="back-link">LOGOUT_SESSION</a>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/ZxnxNjZuxnM" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">CoD: Ghosts</h1>
+                <p class="description">
+                    Outnumbered and outgunned, but not outmatched. Ten years after a devastating mass-event, America’s borders and the balance of global power have changed forever. As what's left of the nation's Special Operations forces, a mysterious group known only as "Ghosts" leads the fight back.
+                </p>
+                <div class="specs-list">
+                    <p>STATUS: <span>ENCRYPTED_SIGNAL</span></p>
+                    <p>FILE_SIZE: <span>29.4 GB (Repack)</span></p>
+                    <p>BUILD_ID: <span>v1.0.RECON_EDITION</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">INITIATE DOWNLOAD</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images6.alphacoders.com/424/424424.jpg" alt="Ghosts 1">
+                <img src="https://images8.alphacoders.com/463/463870.jpg" alt="Ghosts 2">
+                <img src="https://images3.alphacoders.com/463/463868.jpg" alt="Ghosts 3">
+                <img src="https://images2.alphacoders.com/451/451296.jpg" alt="Ghosts 4">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 120;
+        
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<4000; i++) {
+            starPos.push(
+                THREE.MathUtils.randFloatSpread(1500), 
+                THREE.MathUtils.randFloatSpread(1500), 
+                THREE.MathUtils.randFloatSpread(1500)
+            );
+        }
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ 
+            color: 0xffffff, 
+            size: 1.1,
+            transparent: true,
+            opacity: 0.3
+        }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.0003; 
+            stars.rotation.x += 0.0001;
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 0.5, x: y * 0.5, duration: 2.5, ease: "power1.out" });
+        });
+    </script>
+</body>
+</html>

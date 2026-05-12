@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERPUNK 2077 | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --cp-yellow: #fcee0a; 
+            --cp-cyan: #00f0ff;
+            --cp-red: #ff003c;
+            --glass: rgba(0, 0, 0, 0.7); 
+            --glass-border: rgba(252, 238, 10, 0.4); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #020202; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .back-link { 
+            border: 1px solid var(--cp-cyan); color: var(--cp-cyan); 
+            padding: 8px 20px; font-family: 'Orbitron'; 
+            font-size: 0.7rem; transition: 0.3s; background: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(10px); 
+            letter-spacing: 2px;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 85% 100%, 0% 100%);
+        }
+
+        .back-link:hover { 
+            background: var(--cp-cyan); color: #000;
+            box-shadow: 0 0 20px var(--cp-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 90px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 2px solid var(--cp-yellow); 
+            border-left: 10px solid var(--cp-yellow);
+            overflow: hidden; 
+            margin-bottom: 30px; 
+            box-shadow: 0 0 40px rgba(252, 238, 10, 0.2); 
+            background: #000;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: var(--glass); 
+            border: 1px solid var(--glass-border); 
+            padding: clamp(30px, 5vw, 50px); 
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .info-panel::after {
+            content: "SCANNING...";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.6rem;
+            color: var(--cp-yellow);
+            letter-spacing: 3px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            color: var(--cp-yellow); 
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -1px;
+            text-shadow: 3px 3px var(--cp-red);
+        }
+
+        .description {
+            color: var(--cp-cyan); 
+            line-height: 1.7; 
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            margin-bottom: 25px;
+            border-left: 3px solid var(--cp-red);
+            padding-left: 15px;
+        }
+
+        .specs-list { 
+            color: #fff; 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .specs-list p { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: var(--cp-yellow); 
+            color: #000; padding: 20px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            margin-top: 15px; transition: 0.3s; border: none; 
+            cursor: pointer; font-size: 1.1rem; letter-spacing: 4px;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
+        }
+
+        .dl-button:hover { 
+            background: var(--cp-red);
+            color: #fff;
+            box-shadow: 0 0 30px var(--cp-red);
+            transform: scale(1.02);
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border: 1px solid var(--cp-cyan); 
+            transition: 0.4s; 
+            filter: hue-rotate(10deg) brightness(0.8);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            filter: brightness(1.2);
+            transform: translateY(-5px) skewX(-2deg);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
+            border-color: var(--cp-yellow);
+        }
+
+        @media (max-width: 600px) {
+            .screenshot-grid-4 { gap: 10px; }
+            .container { margin-top: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="games.html" class="back-link">← EXIT_REALSEC</a>
+        <div style="font-family: 'Orbitron'; color: var(--cp-yellow); font-size: 0.7rem; letter-spacing: 4px;">NETWATCH_CONNECTED // V_STATUS: ACTIVE</div>
+    </header>
+
+    <main class="container">
+        <!-- CYBERPUNK 2077 TRAILER -->
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/8X2kIfS6fb8" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">CYBERPUNK 2077</h1>
+                <p class="description">
+                    Become a merc in the most dangerous megacity of the future. Customize your cyberware, skillset, and playstyle to explore a sprawling city where the choices you make shape the story.
+                </p>
+                <div class="specs-list">
+                    <p>● CHROME: <span style="color:var(--cp-yellow)">2.12_PHANTOM_LIBERTY</span></p>
+                    <p>● UPLOAD: <span style="color:var(--cp-yellow)">78.4 GB (Highly Compressed)</span></p>
+                    <p>● STATUS: <span style="color:var(--cp-yellow)">ULTIMATE_EDITION_UNLOCKED</span></p>
+                </div>
+                <a href="MAGNET_LINK" class="dl-button">JACK_IN</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images.alphacoders.com/133/1338837.jpeg" alt="Night City">
+                <img src="https://images3.alphacoders.com/112/1128330.jpg" alt="Johnny Silverhand">
+                <img src="https://images5.alphacoders.com/133/1338839.jpeg" alt="Cyberpunk Car">
+                <img src="https://images7.alphacoders.com/112/1128331.jpg" alt="Cyberpunk V">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 130;
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<5000; i++) starPos.push(THREE.MathUtils.randFloatSpread(1400), THREE.MathUtils.randFloatSpread(1400), THREE.MathUtils.randFloatSpread(1400));
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        
+        // Neon Cyan & Red Particles
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0x00f0ff, size: 0.7 }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.001; 
+            stars.rotation.x += 0.0005;
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 1.5, x: y * 1.5, duration: 2, ease: "power2.out" });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOD OF WAR RAGNARÖK | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            /* THEME: FIMBULWINTER BLUE & AESIR GOLD */
+            --gow-blue: #00d4ff; 
+            --gow-gold: #ffcc00; 
+            --glass: rgba(5, 15, 25, 0.9); 
+            --border-glow: rgba(0, 212, 255, 0.4); 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #02080e; 
+            color: white; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: 20px 40px; 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
+        .back-link { 
+            border: 1px solid var(--gow-blue); color: var(--gow-blue); 
+            padding: 10px 22px; font-family: 'Orbitron'; 
+            font-size: 0.75rem; transition: 0.3s; background: rgba(0,0,0,0.6); 
+            border-radius: 2px; text-shadow: 0 0 8px var(--gow-blue);
+            letter-spacing: 2px;
+        }
+
+        .back-link:hover { background: var(--gow-blue); color: #000; box-shadow: 0 0 25px var(--gow-blue); }
+
+        .container { 
+            max-width: 1600px;
+            margin: 100px auto 40px; 
+            padding: 0 30px; 
+            z-index: 10; 
+            position: relative;
+        }
+
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 21/9; 
+            max-height: 450px; 
+            border: 1px solid var(--border-glow);
+            border-radius: 4px;
+            overflow: hidden; 
+            margin-bottom: 30px; 
+            background: #000;
+        }
+
+        .main-content-layout { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 30px; 
+        }
+
+        @media (min-width: 1100px) {
+            .main-content-layout { 
+                grid-template-columns: 350px 1fr; 
+                gap: 30px; 
+            }
+        }
+
+        .info-card { 
+            background: var(--glass); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            padding: 30px; 
+            backdrop-filter: blur(25px);
+            border-top: 4px solid var(--gow-gold);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: 2.2rem; 
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px rgba(0, 212, 255, 0.3);
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .stats { font-size: 0.85rem; color: var(--gow-gold); margin-bottom: 20px; }
+        .stats p { padding: 8px 0; border-bottom: 1px solid rgba(255, 204, 0, 0.1); }
+
+        .dl-btn { 
+            background: linear-gradient(90deg, #005f73, #0a9396);
+            color: white; padding: 18px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            transition: 0.3s; border: 1px solid var(--gow-blue); cursor: pointer; letter-spacing: 2px;
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+        }
+
+        .dl-btn:hover { transform: scale(1.05); filter: brightness(1.2); box-shadow: 0 0 20px var(--gow-blue); }
+
+        .screenshot-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .ss-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; 
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            background: #001219;
+            transition: 0.4s ease;
+        }
+
+        .ss-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s transform ease;
+            filter: saturate(1.2);
+        }
+
+        .ss-box:hover {
+            border-color: var(--gow-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 204, 0, 0.2);
+        }
+
+        .ss-box:hover img { transform: scale(1.05); }
+
+        @media (max-width: 800px) {
+            .screenshot-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="games.html" class="back-link">← REALM_TRAVEL</a>
+        <div style="font-family: 'Orbitron'; color: var(--gow-gold); font-size: 0.7rem; letter-spacing: 4px;">PROJECT_RAGNAROK // PC_STABLE</div>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/hfJ4Km46A-0" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="main-content-layout">
+            <div class="info-card">
+                <div>
+                    <h1 class="title">GoW Ragnarök</h1>
+                    <p style="opacity: 0.7; margin-bottom: 20px;">Kratos and Atreus must journey to each of the Nine Realms in search of answers as Asgardian forces prepare for a prophesied battle.</p>
+                    <div class="stats">
+                        <p>● BUILD: PC_VER_1.0.4</p>
+                        <p>● ASSET_SIZE: 110 GB</p>
+                        <p>● SYSTEM: OPTIMIZED</p>
+                    </div>
+                </div>
+                <button class="dl-btn">BEGIN DOWNLOAD</button>
+            </div>
+
+            <div class="screenshot-container">
+                <div class="ss-box"><img src="https://images8.alphacoders.com/128/1287955.jpg" alt="GoW 1"></div>
+                <div class="ss-box"><img src="https://images8.alphacoders.com/123/1239843.jpg" alt="GoW 2"></div>
+                <div class="ss-box"><img src="https://images.alphacoders.com/128/1287958.jpg" alt="GoW 3"></div>
+                <div class="ss-box"><img src="https://images3.alphacoders.com/132/1325141.jpg" alt="GoW 4"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true });
+        
+        function resize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        camera.position.z = 150;
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        for (let i = 0; i < 4000; i++) {
+            vertices.push(THREE.MathUtils.randFloatSpread(1500), THREE.MathUtils.randFloatSpread(1500), THREE.MathUtils.randFloatSpread(1500));
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const points = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0x00d4ff, size: 0.9 }));
+        scene.add(points);
+
+        function anim() {
+            requestAnimationFrame(anim);
+            points.rotation.y += 0.0004;
+            points.rotation.x += 0.0001;
+            renderer.render(scene, camera);
+        }
+        anim();
+    </script>
+</body>
+</html>

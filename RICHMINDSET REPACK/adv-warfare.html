@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVANCED WARFARE | RICHMINDSET REPACK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&family=Michroma&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --exo-gold: #c5a059; 
+            --atlas-gray: #1a1b1e; 
+            --hologram-blue: #00f2ff; 
+            --glass: rgba(197, 160, 89, 0.03); 
+            --glass-border: rgba(197, 160, 89, 0.4); 
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; }
+        
+        body { 
+            background: #080808; 
+            color: #ffffff; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden; 
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #three-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header { 
+            position: fixed; top: 0; width: 100%; 
+            padding: clamp(15px, 3vw, 25px) clamp(20px, 5vw, 50px); 
+            display: flex; justify-content: space-between; align-items: center; z-index: 100; 
+        }
+
+        .brand-link {
+            font-family: 'Orbitron';
+            color: #fff;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .brand-link span { color: var(--exo-gold); }
+
+        .back-link { 
+            border: 1px solid var(--exo-gold); color: var(--exo-gold); 
+            padding: 10px 25px; font-family: 'Orbitron'; 
+            font-size: 0.65rem; letter-spacing: 2px; transition: 0.4s; 
+            background: rgba(0, 0, 0, 0.9); 
+            backdrop-filter: blur(15px); border-radius: 0;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+        }
+
+        .back-link:hover { 
+            background: var(--exo-gold);
+            color: #000;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.5); 
+            transform: translateY(-2px);
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container { 
+            max-width: 1400px;
+            margin: 100px auto 40px; 
+            padding: 0 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* --- VIDEO PLAYER --- */
+        .video-box { 
+            width: 100%;
+            aspect-ratio: 16/9; 
+            max-height: 520px; 
+            border: 1px solid var(--glass-border); 
+            background: #000;
+            position: relative;
+            box-shadow: inset 0 0 50px rgba(197, 160, 89, 0.1);
+        }
+
+        .video-box::before {
+            content: "SENTINEL FEED // 05.12.26";
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            font-family: 'Orbitron';
+            font-size: 0.6rem;
+            color: var(--exo-gold);
+            letter-spacing: 1px;
+        }
+
+        /* --- DUAL PANEL LAYOUT --- */
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        @media (min-width: 1100px) {
+            .content-grid { 
+                grid-template-columns: minmax(450px, 1fr) 1.3fr; 
+                gap: 40px; 
+            }
+        }
+
+        /* --- INFO PANEL --- */
+        .info-panel { 
+            background: linear-gradient(135deg, rgba(26,27,30,0.9), rgba(10,10,10,0.95)); 
+            border: 1px solid rgba(197, 160, 89, 0.2); 
+            padding: clamp(25px, 4vw, 40px); 
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+
+        .title { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
+            color: #fff; 
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--exo-gold);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .description {
+            color: #ccc; 
+            line-height: 1.8; 
+            font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .dl-button { 
+            display: block; width: 100%; 
+            background: transparent; 
+            color: var(--exo-gold); padding: 20px; text-align: center; 
+            font-family: 'Orbitron'; font-weight: 900; 
+            letter-spacing: 5px; transition: 0.3s; 
+            border: 2px solid var(--exo-gold); 
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .dl-button:hover { 
+            background: var(--exo-gold);
+            color: #000;
+            box-shadow: 0 0 50px rgba(197, 160, 89, 0.4); 
+        }
+
+        /* --- SCREENSHOT GRID --- */
+        .screenshot-grid-4 { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .screenshot-grid-4 img { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            object-fit: cover; 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); 
+            filter: brightness(0.8) sepia(0.2);
+            cursor: pointer;
+        }
+
+        .screenshot-grid-4 img:hover { 
+            border-color: var(--exo-gold); 
+            filter: brightness(1.1) sepia(0);
+            transform: scale(1.02);
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="three-canvas"></canvas>
+    
+    <header class="nav-header">
+        <a href="index.html" class="brand-link">RICHMINDSET<span>REPACKS</span></a>
+        <a href="games.html" class="back-link">TERMINAL_EXIT</a>
+    </header>
+
+    <main class="container">
+        <div class="video-box">
+            <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/sAkEnn3zE_s" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="content-grid">
+            <div class="info-panel">
+                <h1 class="title">Advanced Warfare</h1>
+                <p class="description">
+                    Power changes everything. Enter the battlegrounds of the future, where Private Military Corporations (PMCs) have become the dominant armed forces for a world in chaos. Harness the power of the Exoskeleton to evolve your movement, tactical capabilities, and lethality.
+                </p>
+                <a href="MAGNET_LINK" class="dl-button">DEPLOY EXO-LINK</a>
+            </div>
+
+            <div class="screenshot-grid-4">
+                <img src="https://images.alphacoders.com/513/513515.jpg" alt="AW 1">
+                <img src="https://images6.alphacoders.com/517/517781.jpg" alt="AW 2">
+                <img src="https://images6.alphacoders.com/548/548981.jpg" alt="AW 3">
+                <img src="https://images2.alphacoders.com/513/513516.jpg" alt="AW 4">
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const scene = new THREE.Scene(); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#three-canvas'), alpha: true, antialias: true });
+        
+        function handleResize() {
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        camera.position.z = 100;
+        
+        const starGeo = new THREE.BufferGeometry(); 
+        const starPos = []; 
+        for(let i=0; i<6000; i++) {
+            starPos.push(
+                THREE.MathUtils.randFloatSpread(1200), 
+                THREE.MathUtils.randFloatSpread(1200), 
+                THREE.MathUtils.randFloatSpread(1200)
+            );
+        }
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3)); 
+        
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ 
+            color: 0xc5a059, 
+            size: 0.7,
+            transparent: true,
+            opacity: 0.5
+        }));
+        scene.add(stars); 
+
+        function animate() { 
+            requestAnimationFrame(animate); 
+            stars.rotation.y += 0.001; 
+            stars.rotation.z += 0.0005;
+            renderer.render(scene, camera); 
+        } 
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(stars.rotation, { y: x * 2, x: y * 2, duration: 2 });
+        });
+    </script>
+</body>
+</html>
